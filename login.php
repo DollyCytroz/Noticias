@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Login do Escritor</h1>
+        <h1 class="text-center">Login do Usuario</h1>
         <form method="POST" action="">
             <div class="mb-3">
                 <label for="username" class="form-label">Usuário</label>
