@@ -2,43 +2,19 @@
 session_start();
 include 'db_connect.php';
 
-// Verifica se o usuário logado é um administrador
-if (!isset($_SESSION['loggedin']) || $_SESSION['tipo'] !== 'admin') {
-    header("Location: adminlogin.php");
-    exit;
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
+    $email = $_POST['email']; // Certifique-se de que o campo de email está sendo enviado corretamente
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Agora usamos 'password' para a senha
 
-    // Verifica se as senhas coincidem
-    if ($password !== $confirm_password) {
-        $error = "As senhas não coincidem.";
+    $query = $conn->prepare("INSERT INTO usuarios (username, email, senha, tipo) VALUES (?, ?, ?, 'admin')");
+    $query->bind_param("sss", $username, $email, $password);
+
+    if ($query->execute()) {
+        header("Location: adminlogin.php");
+        exit;
     } else {
-        // Verifica se o nome de usuário já existe
-        $query = $conn->prepare("SELECT id FROM usuarios WHERE username = ?");
-        $query->bind_param("s", $username);
-        $query->execute();
-        $result = $query->get_result();
-
-        if ($result->num_rows > 0) {
-            $error = "O nome de usuário já está em uso.";
-        } else {
-            // Insere o novo administrador no banco de dados
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $tipo = "admin";
-
-            $insert = $conn->prepare("INSERT INTO usuarios (username, password, tipo) VALUES (?, ?, ?)");
-            $insert->bind_param("sss", $username, $hashed_password, $tipo);
-
-            if ($insert->execute()) {
-                $success = "Administrador cadastrado com sucesso!";
-            } else {
-                $error = "Erro ao cadastrar administrador.";
-            }
-        }
+        $error = "Erro ao registrar o administrador. Tente novamente.";
     }
 }
 ?>
@@ -48,35 +24,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Administrador</title>
+    <title>Registrar Administrador</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Cadastrar Novo Administrador</h1>
+        <h1 class="text-center">Registrar Administrador</h1>
         <?php if (isset($success)): ?>
             <div class="alert alert-success"><?php echo $success; ?></div>
-        <?php elseif (isset($error)): ?>
+        <?php endif; ?>
+        <?php if (isset($error)): ?>
             <div class="alert alert-danger"><?php echo $error; ?></div>
         <?php endif; ?>
-        <form method="POST" class="mt-4">
+        <form method="POST">
             <div class="mb-3">
-                <label for="username" class="form-label">Nome de Usuário</label>
+                <label for="username" class="form-label">Usuário</label>
                 <input type="text" name="username" id="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Senha</label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
-            <div class="mb-3">
-                <label for="confirm_password" class="form-label">Confirme a Senha</label>
-                <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+            <button type="submit" class="btn btn-primary w-100">Registrar</button>
         </form>
-        <div class="text-center mt-3">
-            <a href="admin.php">Voltar ao Painel Administrativo</a>
-        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,13 +1,78 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-}
-
-.container {
-    margin-top: 20px;
-}
-
+/* Estilização dos cards */
 .card {
-    margin-bottom: 15px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.3s ease-in-out;
+    height: 380px; /* Definindo altura fixa para o card */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Garantir que o conteúdo e o botão fiquem distantes */
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Efeito de elevação ao passar o mouse */
+}
+
+.card-img-top {
+    border-radius: 15px 15px 0 0; /* Bordas arredondadas na imagem */
+    object-fit: cover; /* Ajuste da imagem */
+    height: 200px; /* Definindo a altura da imagem para caber no card */
+}
+
+.card-body {
+    padding: 15px;
+    overflow: hidden; /* Garante que o texto não ultrapasse o limite */
+    flex-grow: 1; /* Faz o conteúdo de texto ocupar o espaço disponível */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff; /* Título em cor escura */
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: #ffffff; /* Texto mais suave para o resumo */
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.card-footer {
+    background-color: #f1f1f1;
+    border-radius: 0 0 15px 15px;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Estilo do botão "Ler mais" */
+.card-footer .btn-primary {
+    margin-top: 1000px; /* Garante que o botão seja empurrado para o fundo */
+    width: 100%; /* O botão ocupará toda a largura do card */
+    display: block; /* Faz o botão ser um bloco, ocupando toda a linha */
+}
+
+/* Botões */
+.btn-primary {
+    background-color: #007bff; /* Cor de fundo azul */
+    border: none;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Azul mais escuro no hover */
+}
+
+.btn-secondary {
+    background-color: #28a745; /* Cor verde para botões secundários */
+    border: none;
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    background-color: #218838; /* Verde mais escuro no hover */
 }
