@@ -1,24 +1,30 @@
 <?php
+
 session_start();
 include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
-    $email = $_POST['email']; // Certifique-se de que o campo de email está sendo enviado corretamente
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Agora usamos 'password' para a senha
+    $email = $_POST['email']; // Campo email do formulário
+    $password = $_POST['password']; // Senha sem hash
 
-    $query = $conn->prepare("INSERT INTO usuarios (username, email, senha, tipo) VALUES (?, ?, ?, 'admin')");
+    // Corrigir o nome da coluna para "password"
+    $query = $conn->prepare("INSERT INTO usuarios (username, email, password, tipo) VALUES (?, ?, ?, 'admin')");
+
+    if (!$query) {
+        die("Erro na consulta: " . $conn->error); // Exibir o erro do banco de dados
+    }
+
     $query->bind_param("sss", $username, $email, $password);
 
     if ($query->execute()) {
-        header("Location: adminlogin.php");
+        header("Location: login.php");
         exit;
     } else {
         $error = "Erro ao registrar o administrador. Tente novamente.";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -26,13 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Administrador</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href = "adminregister.css" rel = "stylesheet"> 
 </head>
-<body>
-    <div class="container mt-5">
-        <h1 class="text-center">Registrar Administrador</h1>
-        <?php if (isset($success)): ?>
-            <div class="alert alert-success"><?php echo $success; ?></div>
-        <?php endif; ?>
+<body class="d-flex align-items-center" style="min-height: 100vh; background-color: #f4f4f4;">
+    <div class="container bg-white p-4 rounded shadow-sm">
+        <h1 class="text-center mb-4">Registrar Administrador</h1>
         <?php if (isset($error)): ?>
             <div class="alert alert-danger"><?php echo $error; ?></div>
         <?php endif; ?>
@@ -49,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="password" class="form-label">Senha</label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Registrar</button>
+            <button type="submit" class="btn btn-dark w-100">Registrar</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

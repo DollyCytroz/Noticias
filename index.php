@@ -9,17 +9,21 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
 }
 
 // Consulta para pegar as notícias
-$query = "SELECT * FROM noticias WHERE aprovado = 1 ORDER BY data_publicacao DESC"; // Ordenando pela data de publicação
+$query = "SELECT * FROM noticias WHERE aprovado = 1"; // Ordenando pela data de publicação
 $result = $conn->query($query);
 
-// Verifica se há notícias
+// Verifica se a consulta foi bem-sucedida
 $noticias = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $noticias[] = $row;
+if ($result) {
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $noticias[] = $row;
+        }
+    } else {
+        $noticias = null; // Sem notícias disponíveis
     }
 } else {
-    $noticias = null;
+    die("Erro na consulta: " . $conn->error); // Exibe o erro de SQL
 }
 ?>
 
@@ -32,37 +36,46 @@ if ($result->num_rows > 0) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Vinculando o arquivo de estilos CSS -->
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Classe personalizada para um tom mais cinza e bordas arredondadas */
+        .noticias-container {
+            background-color: #6c757d; /* Tom de cinza mais intenso */
+            padding: 30px;
+            border-radius: 15px; /* Borda arredondada */
+        }
+    </style>
 </head>
-<body>
+<body class="fundo">
     <!-- Barra de navegação -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php">Notícias</a>
+        <center> <a class="navbar-brand"> RAP NEWS </a> </center>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php">Início</a>
-                </li>
+                <!-- Verifica se o usuário NÃO está logado -->
+                <?php if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php"> Login </a>
+                    </li>
+                <?php endif; ?>
+
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['tipo'] == 'escritor'): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="escritor.php">Criar Notícia</a>
                     </li>
                 <?php endif; ?>
+
                 <?php if (isset($_SESSION['loggedin'])): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Sair</a>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
                     </li>
                 <?php endif; ?>
             </ul>
         </div>
     </nav>
 
-    <!-- Conteúdo principal -->
-    <div class="container mt-5">
-        <h1 class="text-center text-dark mb-4">Notícias Recentes</h1>
+    <!-- Bloco Cinza mais intenso para as Notícias -->
+    <div class="container mt-5 noticias-container">
+        <h1 class="text-center text-light mb-4">Notícias Recentes</h1>
 
         <?php if ($noticias !== null): ?>
             <div class="row">
@@ -82,7 +95,7 @@ if ($result->num_rows > 0) {
         <?php else: ?>
             <p class="text-center text-light">Ainda não há notícias publicadas.</p>
         <?php endif; ?>
-        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

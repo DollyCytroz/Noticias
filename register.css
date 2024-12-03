@@ -1,0 +1,9 @@
+body {
+    background-image: url(NEWS-RAEL_banner-foto-scaled.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.letra {
+    color: black;
+}

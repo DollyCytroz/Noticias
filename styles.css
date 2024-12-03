@@ -76,3 +76,15 @@
 .btn-secondary:hover {
     background-color: #218838; /* Verde mais escuro no hover */
 }
+
+.navbar-brand {
+    font-size: 200%;
+    margin-left: 500%;
+}
+
+body{
+    background-image: url(racionais-mcs\ \(1\).avif);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

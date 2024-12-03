@@ -53,7 +53,7 @@ if ($result->num_rows > 0) {
                 <?php else: ?>
                     <!-- Exibe o botão de login se o usuário não estiver logado -->
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
+                        <a class="nav-link" href="index.php"> Voltar </a>
                     </li>
                 <?php endif; ?>
             </ul>
