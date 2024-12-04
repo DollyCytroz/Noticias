@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/Site_de_Noticias/Noticias/index.php">Site de Notícias</a>
+        <a class="navbar-brand" href="/Site_de_Noticias/Noticias/index.php"> RAP NEWS </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,7 +18,7 @@
                         </li>
                     <?php endif; ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Site_de_Noticias/Noticias/logout.php">Sair</a>
+                        <a class="nav-link" href="/Site_de_Noticias/Noticias/logout.php"> Logout </a>
                     </li>
                 <?php else: ?>
                     <li class="nav-item">

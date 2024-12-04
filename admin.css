@@ -3,3 +3,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.navbar-brand {
+    font-size: 200%;
+    margin-left: 500%;
+}

@@ -51,6 +51,12 @@ if (!$query) {
     <link href = "admin.css" rel = "stylesheet"> 
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <center> <a href = "index.php" class="navbar-brand"> RAP NEWS </a> </center>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+</nav>
     <div class="container mt-5">
         <h1 class="text-center">Aprovar Notícias</h1>
         <?php if (isset($success)): ?>

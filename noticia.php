@@ -48,7 +48,7 @@ if ($result->num_rows > 0) {
                     <?php endif; ?>
                     <!-- Botão de logout -->
                     <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Sair</a>
+                        <a class="nav-link" href="logout.php"> Logout </a>
                     </li>
                 <?php else: ?>
                     <!-- Exibe o botão de login se o usuário não estiver logado -->
