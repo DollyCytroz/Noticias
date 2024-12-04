@@ -3,7 +3,7 @@ session_start();
 session_unset();  // Remove todas as variáveis de sessão
 session_destroy(); // Destroi a sessão
 
-header("Location: index.php");  // Redireciona para a página inicial após o logout
+header("Location: login.php");  // Redireciona para a página de login após o logout
 exit;
 ?>
 

@@ -79,7 +79,8 @@
 
 .navbar-brand {
     font-size: 200%;
-    margin-left: 500%;
+    margin-left: 430%;
+    text-align: center;
 }
 
 body{
@@ -87,4 +88,6 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
 

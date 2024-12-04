@@ -66,7 +66,6 @@ if ($result->num_rows > 0) {
         <p class="text-muted">Por: <?php echo htmlspecialchars($noticia['autor']); ?></p>
         <img src="uploads/<?php echo htmlspecialchars($noticia['imagem']); ?>" class="img-fluid mb-3" alt="Imagem da notícia">
         <p><?php echo nl2br(htmlspecialchars($noticia['texto'])); ?></p>
-        <a href="index.php" class="btn btn-primary mt-3">Voltar para a Página Inicial</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

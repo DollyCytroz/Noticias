@@ -52,7 +52,7 @@ if (!$query) {
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <center> <a href = "index.php" class="navbar-brand"> RAP NEWS </a> </center>
+        <center> <a href = "index.php" class="navbar-brand"> RAP NEWS </a> </center> 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
 

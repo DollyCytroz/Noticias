@@ -46,7 +46,7 @@ if ($result) {
 <body class="fundo">
     <!-- Barra de navegação -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <center> <a class="navbar-brand"> RAP NEWS </a> </center>
+        <center> <a class="navbar-brand"> RAP NEWS </a>  </center> 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <!-- Verifica se o usuário NÃO está logado -->
@@ -55,16 +55,22 @@ if ($result) {
                         <a class="nav-link" href="login.php"> Login </a>
                     </li>
                 <?php endif; ?>
-
-                <?php if (isset($_SESSION['loggedin']) && $_SESSION['tipo'] == 'escritor'): ?>
+                
                     <li class="nav-item">
-                        <a class="nav-link" href="escritor.php">Criar Notícia</a>
+                        <a class="nav-link criar" href="escritor.php">Criar Notícia</a>
                     </li>
-                <?php endif; ?>
 
-                li class = "nav-item"> 
-                    <a class= "nav-link" href = "adminregister.php"> Ajude-nos </a> 
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['tipo'] == 'admin'): ?>
+                <li class = "nav-item"> 
+                    <a class= "nav-link" href = "admin.php"> Admin </a> 
                 </li>
+
+                <?php else: ?> 
+                    <li class = "nav-item"> 
+                        <a class = "nav-link" href = "adminregister.php"> Ajude-nos </a> 
+                </li> 
+
+                <?php endif; ?> 
 
                 <?php if (isset($_SESSION['loggedin'])): ?>
                     <li class="nav-item">

@@ -5,7 +5,7 @@ include 'db_connect.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $password = $_POST['senha']; // Removendo o uso do hash
+    $password = $_POST['senha']; 
 
     $query = $conn->prepare("INSERT INTO usuarios (username, email, password, tipo) VALUES (?, ?, ?, 'escritor')");
     $query->bind_param("sss", $username, $email, $password);

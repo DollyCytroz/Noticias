@@ -3,7 +3,7 @@
 session_start();
 include 'db_connect.php';
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['tipo'] !== 'escritor') {
+if (!isset($_SESSION['loggedin'])) {
     header("Location: login.php");
     exit;
 }
